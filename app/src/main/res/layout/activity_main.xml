@@ -24,7 +24,7 @@
                 android:contentDescription="@string/box"
                 android:layout_width="100dp"
                 android:layout_height="100dp" tools:layout_editor_absoluteY="257dp"
-                tools:layout_editor_absoluteX="0dp" android:id="@+id/ttt_box1"/>
+                tools:layout_editor_absoluteX="0dp" android:id="@+id/ttt_box1" />
         <ImageButton
                 style="@style/ttt_box"
                 android:src="@android:color/transparent"
