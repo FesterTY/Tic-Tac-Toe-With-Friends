@@ -5,15 +5,94 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        android:background="#fff">
 
-    <TextView
+
+    <GridLayout android:layout_width="300dp" android:layout_height="300dp" android:id="@+id/gridLayout"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+                android:columnCount="3" android:rowCount="3"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginRight="8dp">
+
+        <ImageButton
+                style="@style/ttt_box"
+                android:src="@android:color/transparent"
+                android:contentDescription="@string/box"
+                android:layout_width="100dp"
+                android:layout_height="100dp" tools:layout_editor_absoluteY="257dp"
+                tools:layout_editor_absoluteX="0dp" android:id="@+id/ttt_box1"/>
+        <ImageButton
+                style="@style/ttt_box"
+                android:src="@android:color/transparent"
+                android:contentDescription="@string/box"
+                android:layout_width="100dp"
+                android:layout_height="100dp" tools:layout_editor_absoluteY="257dp"
+                tools:layout_editor_absoluteX="0dp" android:id="@+id/ttt_box2"/>
+        <ImageButton
+                style="@style/ttt_box"
+                android:src="@android:color/transparent"
+                android:contentDescription="@string/box"
+                android:layout_width="100dp"
+                android:layout_height="100dp" tools:layout_editor_absoluteY="257dp"
+                tools:layout_editor_absoluteX="0dp" android:id="@+id/ttt_box3"/>
+        <ImageButton
+                style="@style/ttt_box"
+                android:src="@android:color/transparent"
+                android:contentDescription="@string/box"
+                android:layout_width="100dp"
+                android:layout_height="100dp" tools:layout_editor_absoluteY="257dp"
+                tools:layout_editor_absoluteX="0dp" android:id="@+id/ttt_box4"/>
+        <ImageButton
+                style="@style/ttt_box"
+                android:src="@android:color/transparent"
+                android:contentDescription="@string/box"
+                android:layout_width="100dp"
+                android:layout_height="100dp" tools:layout_editor_absoluteY="257dp"
+                tools:layout_editor_absoluteX="0dp" android:id="@+id/ttt_box5"/>
+        <ImageButton
+                style="@style/ttt_box"
+                android:src="@android:color/transparent"
+                android:contentDescription="@string/box"
+                android:layout_width="100dp"
+                android:layout_height="100dp" tools:layout_editor_absoluteY="257dp"
+                tools:layout_editor_absoluteX="0dp" android:id="@+id/ttt_box6"/>
+        <ImageButton
+                style="@style/ttt_box"
+                android:src="@android:color/transparent"
+                android:contentDescription="@string/box"
+                android:layout_width="100dp"
+                android:layout_height="100dp" tools:layout_editor_absoluteY="257dp"
+                tools:layout_editor_absoluteX="0dp" android:id="@+id/ttt_box7"/>
+        <ImageButton
+                style="@style/ttt_box"
+                android:src="@android:color/transparent"
+                android:contentDescription="@string/box"
+                android:layout_width="100dp"
+                android:layout_height="100dp" tools:layout_editor_absoluteY="257dp"
+                tools:layout_editor_absoluteX="0dp" android:id="@+id/ttt_box8"/>
+        <ImageButton
+                style="@style/ttt_box"
+                android:src="@android:color/transparent"
+                android:contentDescription="@string/box"
+                android:layout_width="100dp"
+                android:layout_height="100dp" tools:layout_editor_absoluteY="257dp"
+                tools:layout_editor_absoluteX="0dp" android:id="@+id/ttt_box9"/>
+
+    </GridLayout>
+    <ImageView
+            android:src="@drawable/board"
+            android:contentDescription="@string/board"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:id="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
