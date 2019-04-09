@@ -7,6 +7,7 @@ import android.widget.ImageButton
 
 class MainActivity : Activity() {
 
+    private val gameManager = GameManager()
     private val gridCount = 9
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,8 @@ class MainActivity : Activity() {
 
     private fun tttBoxClicked(): View.OnClickListener {
         return View.OnClickListener {
-            Player('x').markSymbol(it as ImageButton)
+            Player(if (gameManager.currentPlayer == 1) 'x' else 'o').markSymbol(it as ImageButton)
+            gameManager.switchTurn()
         }
     }
 }
