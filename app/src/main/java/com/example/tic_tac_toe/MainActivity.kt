@@ -7,7 +7,7 @@ import android.widget.ImageButton
 
 class MainActivity : Activity() {
 
-    private val gameManager = GameManager()
+    private val gameManager = GameManager(this, this)
     private val gridCount = 9
     private var gridButtons = mutableListOf<ImageButton>()
 

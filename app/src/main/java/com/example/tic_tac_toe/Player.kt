@@ -14,7 +14,7 @@ class Player(_symbol: Char) {
             else -> Log.e("com.example.tic_tac_toe","Symbol is neither x nor o")
         }
 
-        currentButton.tag = "pressed"
+        currentButton.tag = symbol.toString()
     }
 
 }
