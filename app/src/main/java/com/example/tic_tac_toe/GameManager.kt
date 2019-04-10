@@ -17,29 +17,58 @@ class GameManager(_context: Context, _activity: Activity) {
     }
 
     fun checkGameOver(buttons: MutableList<ImageButton>): Boolean {
-        if (checkVertical(buttons))
-            return true
-        else if (checkBoardFull(buttons))
-            return true
+        val gridSize = Math.floor(sqrt(buttons.size.toDouble())).toInt()
+
+        return when {
+            checkVertical(gridSize) -> true
+            checkHorizontal(gridSize) -> true
+            checkBoardFull(buttons) -> true
+            else -> false
+        }
+
+    }
+
+    private fun checkVertical(gridSize: Int): Boolean {
+
+        val sizeToIncrementBy = gridSize
+
+        for (col in 1..gridSize) {
+            var currentBoxNum = col
+            val buttonsList = arrayListOf<String>()
+
+            for (rows in 1..gridSize) {
+                buttonsList += activity.findViewById<ImageButton>(context.resources.getIdentifier("ttt_box$currentBoxNum",
+                    "id", context.packageName)).tag.toString()
+                currentBoxNum += sizeToIncrementBy
+            }
+
+            // Once finish loop through the rows
+            if(checkStraight(buttonsList)) {
+                Toast.makeText(context, "${buttonsList[0]} is the winner by vertically!", Toast.LENGTH_SHORT).show()
+                return true
+            }
+        }
 
         return false
     }
 
-    private fun checkVertical(buttons: MutableList<ImageButton>): Boolean {
+    private fun checkHorizontal(gridSize: Int): Boolean {
 
-        val gridSize = Math.floor(sqrt(buttons.size.toDouble())).toInt()
-        for (col in 1..gridSize) {
-            var currentBoxNum = col
-            val buttonsInCol = arrayListOf<String>()
+        val sizeToIncrementBy = 1
 
-            for (rows in 1..gridSize) {
-                buttonsInCol += activity.findViewById<ImageButton>(context.resources.getIdentifier("ttt_box$currentBoxNum", "id", context.packageName)).tag.toString()
-                currentBoxNum += gridSize
+        for (row in 1..(gridSize*gridSize) step gridSize) {
+            var currentBoxNum = row
+            val buttonsList = arrayListOf<String>()
+
+            for (col in 1..gridSize) {
+                buttonsList += activity.findViewById<ImageButton>(context.resources.getIdentifier("ttt_box$currentBoxNum",
+                    "id", context.packageName)).tag.toString()
+                currentBoxNum += sizeToIncrementBy
             }
 
-            // Once it's done adding all buttons to the arrayList
-            if ((buttonsInCol.count { it == buttonsInCol[0] } == buttonsInCol.size) && buttonsInCol[0] != PlayerInfo.defaultTag) {
-                Toast.makeText(context, "${buttonsInCol[0]} is the winner!", Toast.LENGTH_LONG).show()
+            // Once finish loop through the rows
+            if(checkStraight(buttonsList)) {
+                Toast.makeText(context, "${buttonsList[0]} is the winner by horizontally!", Toast.LENGTH_SHORT).show()
                 return true
             }
         }
@@ -60,6 +89,13 @@ class GameManager(_context: Context, _activity: Activity) {
             return true
         }
 
+        return false
+    }
+
+    private fun checkStraight(buttons: ArrayList<String>): Boolean {
+        if ((buttons.count { it == buttons[0] } == buttons.size) && buttons[0] != PlayerInfo.defaultTag) {
+            return true
+        }
         return false
     }
 }
