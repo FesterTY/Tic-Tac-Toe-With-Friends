@@ -28,13 +28,17 @@ class GameManager(_context: Context, _activity: Activity) {
 
     }
 
+    // Check for vertical win (|)
     private fun checkVertical(gridSize: Int): Boolean {
-        return loopThroughGrid(gridSize,1, gridSize*gridSize, gridSize)
+        // Go through each column, increment the index of the box by 3, making it loops through vertically
+        return loopThroughGrid(gridSize, gridSize)
     }
 
+    // Check for horizontal win (--)
     private fun checkHorizontal(gridSize: Int): Boolean {
-        return loopThroughGrid(gridSize, sizeToIncrementBy = gridSize)
-    }
+        // Increment the column by 3 every time. After the increment, go through the row one by one.
+        return loopThroughGrid(gridSize, 1, gridSize*gridSize, 3)
+}
 
     // Check whether or not board is full
     private fun checkBoardFull(buttons: MutableList<ImageButton>): Boolean {
@@ -52,12 +56,12 @@ class GameManager(_context: Context, _activity: Activity) {
         return false
     }
 
-    private fun loopThroughGrid(gridSize: Int, sizeToIncrementBy: Int, sizeOfRows: Int=3, stepOfRow: Int=1): Boolean {
-        for (col in 1..gridSize) {
+    private fun loopThroughGrid(gridSize: Int, sizeToIncrementBy: Int, maximumColumnToLoop: Int=3, columnsToStep: Int=1): Boolean {
+        for (col in 1..maximumColumnToLoop step columnsToStep) {
             var currentBoxNum = col
             val buttonsList = arrayListOf<String>()
 
-            for (rows in 1..sizeOfRows step stepOfRow) {
+            for (row in 1..gridSize) {
                 buttonsList += activity.findViewById<ImageButton>(context.resources.getIdentifier("ttt_box$currentBoxNum",
                     "id", context.packageName)).tag.toString()
                 currentBoxNum += sizeToIncrementBy
