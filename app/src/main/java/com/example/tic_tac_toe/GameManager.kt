@@ -22,6 +22,7 @@ class GameManager(_context: Context, _activity: Activity) {
         return when {
             checkVertical(gridSize) -> true
             checkHorizontal(gridSize) -> true
+            checkDiagonal(gridSize) -> true
             checkBoardFull(buttons) -> true
             else -> false
         }
@@ -38,7 +39,19 @@ class GameManager(_context: Context, _activity: Activity) {
     private fun checkHorizontal(gridSize: Int): Boolean {
         // Increment the column by 3 every time. After the increment, go through the row one by one.
         return loopThroughGrid(gridSize, 1, gridSize*gridSize, 3)
-}
+    }
+
+    private fun checkDiagonal(gridSize: Int): Boolean {
+        return when {
+            // forward diagonal
+            // Only one column, but increment the row by gridSize+1 to get the forward diagonal row
+            (loopThroughGrid(gridSize, gridSize+1, 1)) -> true
+            // backward diagonal
+            // Only one column, but increment the row by gridSize-1 to get the backward diagonal row
+            (loopThroughGrid(gridSize, gridSize-1, 1, startingCol = 3)) -> true
+            else -> false
+        }
+    }
 
     // Check whether or not board is full
     private fun checkBoardFull(buttons: MutableList<ImageButton>): Boolean {
@@ -56,9 +69,10 @@ class GameManager(_context: Context, _activity: Activity) {
         return false
     }
 
-    private fun loopThroughGrid(gridSize: Int, sizeToIncrementBy: Int, maximumColumnToLoop: Int=3, columnsToStep: Int=1): Boolean {
+    private fun loopThroughGrid(gridSize: Int, sizeToIncrementBy: Int, maximumColumnToLoop: Int=3, columnsToStep: Int=1, startingCol: Int=0): Boolean {
         for (col in 1..maximumColumnToLoop step columnsToStep) {
-            var currentBoxNum = col
+            // If startingCol isn't set, use col, if startingCol IS set, use startingCol
+            var currentBoxNum = if(startingCol == 0) col else startingCol
             val buttonsList = arrayListOf<String>()
 
             for (row in 1..gridSize) {
@@ -68,7 +82,7 @@ class GameManager(_context: Context, _activity: Activity) {
             }
 
             // Once finish loop through the rows
-            if(checkStraight(buttonsList)) {
+            if (checkStraight(buttonsList)) {
                 Toast.makeText(context, "${buttonsList[0]} is the winner", Toast.LENGTH_SHORT).show()
                 return true
             }
