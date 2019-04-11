@@ -23,9 +23,11 @@ class MainActivity : Activity() {
 
     private fun tttBoxClicked(): View.OnClickListener {
         return View.OnClickListener {
-            Player(if (gameManager.currentPlayer == 1) 'x' else 'o').markSymbol(it as ImageButton)
-            gameManager.checkGameOver(gridButtons)
-            gameManager.switchTurn()
+            while(it.tag == "not_pressed") {
+                Player(if (gameManager.currentPlayer == 1) 'x' else 'o').markSymbol(it as ImageButton)
+                gameManager.checkGameOver(gridButtons)
+                gameManager.switchTurn()
+            }
         }
     }
 }
