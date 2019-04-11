@@ -2,7 +2,9 @@ package com.example.tic_tac_toe
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import java.lang.Math.sqrt
 
@@ -10,10 +12,22 @@ class GameManager(_context: Context, _activity: Activity) {
 
     private val context = _context
     private val activity = _activity
-    var currentPlayer = 0
+    var currentPlayer = 1
 
     fun switchTurn() {
         currentPlayer = 1 - currentPlayer
+        val turnText = activity.findViewById<TextView>(R.id.turn_text)
+
+        when (currentPlayer) {
+            0 -> {
+                turnText.setText(R.string.o_turn)
+                turnText.setTextColor(Color.DKGRAY)
+            }
+            1 -> {
+                turnText.setText(R.string.x_turn)
+                turnText.setTextColor(Color.parseColor("#00abff"))
+            }
+        }
     }
 
     fun checkGameOver(buttons: MutableList<ImageButton>): Boolean {
