@@ -3,18 +3,25 @@ package com.example.tic_tac_toe
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
-import android.widget.TextView
+
+/***************
+* CODE WRITTEN BY FESTER - TEERARIT W.
+ **************/
 
 class MainActivity : Activity() {
 
     private val gameManager = GameManager(this, this)
     private val gridCount = 9
     private var gridButtons = mutableListOf<ImageButton>()
+    private lateinit var restartButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        restartButton = findViewById(R.id.restart_button)
 
         for (i in 1..gridCount) {
             gridButtons.add(findViewById(resources.getIdentifier("ttt_box$i", "id", packageName)))
@@ -28,6 +35,7 @@ class MainActivity : Activity() {
                 Player(if (gameManager.currentPlayer == 1) 'x' else 'o').markSymbol(it as ImageButton)
                 if (gameManager.checkGameOver(gridButtons)) {
                     gameManager.turnText.setTextColor(PlayerInfo.defaultTextColor)
+                    restartButton.visibility = View.VISIBLE
                 } else {
                     gameManager.switchTurn()
                 }

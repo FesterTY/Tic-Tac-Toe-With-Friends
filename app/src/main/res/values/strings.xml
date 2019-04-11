@@ -6,4 +6,5 @@
     <string name="o_turn">O\'s Turn</string>
     <string name="draw">Draw!</string>
     <string name="win">%1$s wins!</string>
+    <string name="restart">RESTART</string>
 </resources>
