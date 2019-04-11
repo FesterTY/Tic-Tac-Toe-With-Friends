@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
 
 class MainActivity : Activity() {
 
@@ -25,8 +26,11 @@ class MainActivity : Activity() {
         return View.OnClickListener {
             while(it.tag == "not_pressed") {
                 Player(if (gameManager.currentPlayer == 1) 'x' else 'o').markSymbol(it as ImageButton)
-                gameManager.checkGameOver(gridButtons)
-                gameManager.switchTurn()
+                if (gameManager.checkGameOver(gridButtons)) {
+                    gameManager.turnText.setTextColor(PlayerInfo.defaultTextColor)
+                } else {
+                    gameManager.switchTurn()
+                }
             }
         }
     }

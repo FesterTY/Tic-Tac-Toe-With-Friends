@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Color
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import java.lang.Math.sqrt
 
 class GameManager(_context: Context, _activity: Activity) {
@@ -13,19 +12,22 @@ class GameManager(_context: Context, _activity: Activity) {
     private val context = _context
     private val activity = _activity
     var currentPlayer = 1
+    lateinit var turnText: TextView
+    private val xColor = "#00abff"
+    private val oColor = Color.DKGRAY
 
     fun switchTurn() {
         currentPlayer = 1 - currentPlayer
-        val turnText = activity.findViewById<TextView>(R.id.turn_text)
+        turnText = activity.findViewById(R.id.turn_text)
 
         when (currentPlayer) {
             0 -> {
                 turnText.setText(R.string.o_turn)
-                turnText.setTextColor(Color.DKGRAY)
+                turnText.setTextColor(oColor)
             }
             1 -> {
                 turnText.setText(R.string.x_turn)
-                turnText.setTextColor(Color.parseColor("#00abff"))
+                turnText.setTextColor(Color.parseColor(xColor))
             }
         }
     }
@@ -37,7 +39,10 @@ class GameManager(_context: Context, _activity: Activity) {
             checkVertical(gridSize) -> true
             checkHorizontal(gridSize) -> true
             checkDiagonal(gridSize) -> true
-            checkBoardFull(buttons) -> true
+            checkBoardFull(buttons) -> {
+                turnText.setText(R.string.draw)
+                true
+            }
             else -> false
         }
 
@@ -75,10 +80,8 @@ class GameManager(_context: Context, _activity: Activity) {
                 pressedButtons++
             }
         }
-        if (pressedButtons >= 9) {
-            Toast.makeText(context, "Board is full! Cannot continue further.", Toast.LENGTH_LONG).show()
+        if (pressedButtons >= 9)
             return true
-        }
 
         return false
     }
@@ -97,7 +100,6 @@ class GameManager(_context: Context, _activity: Activity) {
 
             // Once finish loop through the rows
             if (checkStraight(buttonsList)) {
-                Toast.makeText(context, "${buttonsList[0]} is the winner", Toast.LENGTH_SHORT).show()
                 return true
             }
         }
@@ -107,6 +109,8 @@ class GameManager(_context: Context, _activity: Activity) {
 
     private fun checkStraight(buttons: ArrayList<String>): Boolean {
         if ((buttons.count { it == buttons[0] } == buttons.size) && buttons[0] != PlayerInfo.defaultTag) {
+            val winText = activity.resources.getString(R.string.win, buttons[0].toUpperCase())
+            turnText.text = winText
             return true
         }
         return false

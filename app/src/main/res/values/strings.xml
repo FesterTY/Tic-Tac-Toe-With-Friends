@@ -4,4 +4,6 @@
     <string name="board">Board</string>
     <string name="x_turn">X\'s Turn</string>
     <string name="o_turn">O\'s Turn</string>
+    <string name="draw">Draw!</string>
+    <string name="win">%1$s wins!</string>
 </resources>
