@@ -20,26 +20,33 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        gameManager.init()
 
         restartButton = findViewById(R.id.restart_button)
-
-        for (i in 1..gridCount) {
-            gridButtons.add(findViewById(resources.getIdentifier("ttt_box$i", "id", packageName)))
-            gridButtons[i-1].setOnClickListener(tttBoxClicked())
-        }
+        attachButtonsListener(tttBoxClicked())
     }
 
     private fun tttBoxClicked(): View.OnClickListener {
         return View.OnClickListener {
             while(it.tag == "not_pressed") {
                 Player(if (gameManager.currentPlayer == 1) 'x' else 'o').markSymbol(it as ImageButton)
+
                 if (gameManager.checkGameOver(gridButtons)) {
                     gameManager.turnText.setTextColor(PlayerInfo.defaultTextColor)
                     restartButton.visibility = View.VISIBLE
+                    // Detach all listeners from buttons
+                    attachButtonsListener(null)
                 } else {
                     gameManager.switchTurn()
                 }
             }
+        }
+    }
+
+    private fun attachButtonsListener(functionToAttach: View.OnClickListener?) {
+        for (i in 1..gridCount) {
+            gridButtons.add(findViewById(resources.getIdentifier("ttt_box$i", "id", packageName)))
+            gridButtons[i-1].setOnClickListener(functionToAttach)
         }
     }
 }

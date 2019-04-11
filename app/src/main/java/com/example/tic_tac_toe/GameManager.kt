@@ -16,10 +16,12 @@ class GameManager(_context: Context, _activity: Activity) {
     private val xColor = "#00abff"
     private val oColor = Color.DKGRAY
 
+    fun init() {
+        turnText = activity.findViewById(R.id.turn_text)
+    }
+
     fun switchTurn() {
         currentPlayer = 1 - currentPlayer
-        turnText = activity.findViewById(R.id.turn_text)
-
         when (currentPlayer) {
             0 -> {
                 turnText.setText(R.string.o_turn)
