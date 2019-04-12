@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ttt_box">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:tag">not_pressed</item>
+    </style>
+
 </resources>
