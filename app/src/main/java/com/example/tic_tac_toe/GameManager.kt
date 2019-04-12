@@ -3,18 +3,23 @@ package com.example.tic_tac_toe
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
+import java.lang.Exception
 import java.lang.Math.sqrt
 
 class GameManager(_context: Context, _activity: Activity) {
 
     private val context = _context
     private val activity = _activity
-    var currentPlayer = 1
+
     lateinit var turnText: TextView
-    private val xColor = "#00abff"
+
+    val xColor = "#00abff"
     private val oColor = Color.DKGRAY
+
+    var currentPlayer = 1
 
     fun init() {
         turnText = activity.findViewById(R.id.turn_text)
@@ -92,11 +97,19 @@ class GameManager(_context: Context, _activity: Activity) {
         for (col in 1..maximumColumnToLoop step columnsToStep) {
             // If startingCol isn't set, use col, if startingCol IS set, use startingCol
             var currentBoxNum = if(startingCol == 0) col else startingCol
+            Log.i(activity.packageName, currentBoxNum.toString())
             val buttonsList = arrayListOf<String>()
 
             for (row in 1..gridSize) {
-                buttonsList += activity.findViewById<ImageButton>(context.resources.getIdentifier("ttt_box$currentBoxNum",
-                    "id", context.packageName)).tag.toString()
+                try {
+                    // For some weird reason, the button itself couldn't be found through this method.
+                    // I suspect that "currentBoxNum" has something to do with this!!!!!!!
+                    // YEP CAN CONFIRM!! THE LOG SAYS "11 16 21". THAT IS OUT OF BOUND!!!!!!!
+                    buttonsList += activity.findViewById<ImageButton>(context.resources.getIdentifier("ttt_box$currentBoxNum",
+                        "id", context.packageName)).tag.toString()
+                } catch(e: Exception) {
+                    Log.w(activity.packageName, currentBoxNum.toString())
+                }
                 currentBoxNum += sizeToIncrementBy
             }
 

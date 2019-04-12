@@ -11,10 +11,14 @@ class Player(_symbol: Char) {
         when (symbol) {
             'x' -> currentButton.setImageResource(R.drawable.x)
             'o' -> currentButton.setImageResource(R.drawable.o)
-            else -> Log.e("com.example.tic_tac_toe","Symbol is neither x nor o")
+            else -> currentButton.setImageResource(android.R.color.transparent)
         }
 
-        currentButton.tag = symbol.toString()
+        if (symbol == 'x' || symbol == 'o')
+            currentButton.tag = symbol.toString()
+        else {
+            currentButton.tag = PlayerInfo.defaultTag
+        }
     }
 
 }
