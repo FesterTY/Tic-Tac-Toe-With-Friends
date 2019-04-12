@@ -1,4 +1,8 @@
-# Tic-Tac-Toe-With-Friends
+<p align="middle">
+  <img src="https://i.imgur.com/jaLmiHL.png" width="200" />
+</p>
+
+<h1 align="middle">Tic-Tac-Toe-With-Friends</h1>
 
 A Tic Tac Toe application for Android. Play with a friend on one screen!
 
