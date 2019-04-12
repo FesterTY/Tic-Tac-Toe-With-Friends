@@ -102,9 +102,6 @@ class GameManager(_context: Context, _activity: Activity) {
 
             for (row in 1..gridSize) {
                 try {
-                    // For some weird reason, the button itself couldn't be found through this method.
-                    // I suspect that "currentBoxNum" has something to do with this!!!!!!!
-                    // YEP CAN CONFIRM!! THE LOG SAYS "11 16 21". THAT IS OUT OF BOUND!!!!!!!
                     buttonsList += activity.findViewById<ImageButton>(context.resources.getIdentifier("ttt_box$currentBoxNum",
                         "id", context.packageName)).tag.toString()
                 } catch(e: Exception) {
